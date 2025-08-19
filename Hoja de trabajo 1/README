@@ -1,4 +1,4 @@
 # Tarea 1
-Descripcion: Se hizo una pagina utilizando solo etiquetas de html, para promocionar el lugar turistico de Xetulul (IRTRA), agregando una descripcion del lugar, un indice, galeria de imagenes, tabla de itinerario y  una tabla de actividades para realizar.
-Enlace Netlify: https://elegant-pegasus-dc01cc.netlify.app/
+Descripcion: Se hicieron cambios en el index, las tablas sueltas se organizaro en botones que despliegan la tabla seleccionada y oculta las demas, en este apartado se agrego una nueva tabla siendo 3 en total, luego de las tablas se encuentra los comentarios, los cuales se seleccionan de 2 arrays seleccionando 3 de cada uno, por ultimo se agrego una nueva pagina de contacto, donde se debe llenar un formulario, por medio de  java script se valida la informacion del formulario y si todo es correfto muestra un modal con un mensaje de exito e imprime los datos en consola.
+Enlace Netlify: https://playful-alfajores-e1b7cf.netlify.app/
 Nombre: Mario Andres Culajay Roldan   Carnet: 9490-22-5771
