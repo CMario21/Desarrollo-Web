@@ -1,241 +1,297 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoja de trabajo 1</title>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link rel="stylesheet" href="estilo/index_estilo.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xetulul - Parque de Diversiones</title>
 </head>
 <body>
-    <CENTER>
-        <h1>Parque de Diversiones <br>XETULUL</h1>
-        <p><font size="4">En el Gran Parque de Diversiones Xetulul encontrarás Magia y Diversión para toda la familia. 
-            Descubre la gran variedad de actividades que puedes realizar. <br>Disfruta de impresionantes 
-            atracciones y emocionantes juegos electromecánicos para grandes y chicos, espectaculares 
-            shows ambulantes y el fantástico Show <br> de Magia del Gran Teatro de Francia, extraordinarias 
-            tiendas de regalos y diversidad de restaurantes para todos los gustos en las diferentes 
-            plazas br que brindan <br> un escenario arquitectónico donde se muestra el origen y la historia de Guatemala. </font></p>
 
-        <h3><font size="4">Visitanos</font></h3>
-        <p><font size="4">
-            Domingo, viernes, sábado, días festivos de 10:00 a 18:00 hrs. <br>
-            Jueves de 10:00 a 17:00 hrs.
-            </font>
-        </p>
-    </CENTER><br>
+    <nav class="navbar navbar-expand-lg sticky-top ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"><img src="img/logo-irtra.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Inicio
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#Galeria ">Galeria</a></li>
+                    <li><a class="dropdown-item" href="#Itinerario">Itinerario</a></li>
+                    <li><a class="dropdown-item" href="#Actividades">Actividades</a></li>
+                </ul>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="Atracciones.html">Atracciones</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="Alojamientos.html">Alojamiento</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="Contactanos.html">Contactanos</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
 
-    <blockquote>
-    <h2><b><font size="5">Índice</font></b></h2>
-    <hr>
-    <ul>
-        <li><font size="4"><a href="#Galeria">Galería de imágenes</a></font></li><br>
-        
-        <li><font size="4"><a href="#Itinerario">Itinerario</a></font>
-        <ol type="a">
-            <li><font size="3"><a href="#hora1">10:00 AM - Entrada</a></font></li>
-            <li><font size="3"><a href="#hora2">11:00 AM - Juegos familiares</a></font></li>
-            <li><font size="3"><a href="#hora3">12:00 PM - Montaña rusa</a></font></li>
-            <li><font size="3"><a href="#hora4">1:00 PM - Almuerzo</a></font></li>
-            <li><font size="3"><a href="#hora5">2:00 PM - Juegos mecánicos</a></font></li>
-            <li><font size="3"><a href="#hora6">4:00 PM - Show de magia</a></font></li>
-            <li><font size="3"><a href="#hora7">5:30 PM - Despedida</a></font></li>
-        </ol>
-        </li><br>
+  <header class="container my-5">
+    <h1><b> Parque de Diversiones <br> XETULUL</b></h1>
+    <p>
+      En el Gran Parque de Diversiones Xetulul encontrarás Magia y Diversión para toda la familia. 
+      Descubre la gran variedad de actividades que puedes realizar. Disfruta de impresionantes 
+      atracciones y emocionantes juegos electromecánicos para grandes y chicos, espectaculares 
+      shows ambulantes y el fantástico Show de Magia del Gran Teatro de Francia. 
+      Tiendas de regalos y diversidad de restaurantes para todos los gustos en las diferentes 
+      plazas que muestran el origen y la historia de Guatemala.
+    </p>
 
-        <li><font size="4"><a href="#Actividades">Actividades</a></font></li>
-    </ul>
-    <hr>
-    </blockquote>
+    <h4>Visítanos</h4>
+    <p>
+      Domingo, viernes, sábado, días festivos: 10:00 a 18:00 hrs. <br>
+      Jueves: 10:00 a 17:00 hrs.
+    </p>
+  </header>
 
-    <center>
-        <h2 id="Galeria"><font size="6"> Galeria de Imágenes</font></h2>
-        <table align="center" border="0" cellpadding="5" cellspacing="5">
+
+  <div class="container my-5" id="Galeria">
+    <h2 class="text-center">Galería</h2>
+    <div class="row g-3 gallery">
+        <div class="col-6 ">
+            <img src="img/img1.jpg" alt="Imagen 1" class="img-fluid">
+        </div>
+        <div class="col-6 ">
+            <img src="img/img2.jpg" alt="Imagen 2" class="img-fluid">
+        </div>
+        <div class="col-6 ">
+            <img src="img/img3.jpg" alt="Imagen 3" class="img-fluid">
+        </div>
+        <div class="col-6 ">
+            <img src="img/img4.jpg" alt="Imagen 4" class="img-fluid">
+        </div>
+        <div class="col-6 ">
+            <img src="img/img5.jpg" alt="Imagen 5" class="img-fluid">
+        </div>
+        <div class="col-6 ">
+            <img src="img/img6.jpg" alt="Imagen 6" class="img-fluid">
+        </div>
+    </div>
+</div>
+
+  <div class="container my-5" id="Itinerario">
+      <div class="d-flex justify-content-center gap-3" id="Actividades">
+          <button id="boton1" type="button" class="btn btn-primary">Itinerario</button>
+          <button id="boton2" type="button" class="btn btn-secondary">Actividades</button>
+          <button id="boton3" type="button" class="btn btn-success">Tarifas</button>
+      </div>
+  </div>
+
+  <div class="container my-5 tabla1">
+    <h3 class="text-center">Itinerario</h3>
+    <p>Como parte de la experiencia te sugerimos seguir el siguiente itinerario:</p>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Hora</th>
+            <th>Actividad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="hora1">
+            <td>10:00 AM</td>
+            <td>
+              Entrada y primera exploración
+              <ul>
+                <li>Ingreso al parque.</li>
+                <li>Recorre las plazas temáticas: Plaza Chapina, Pueblo Guatemalteco y Plaza Maya.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr id="hora2">
+            <td>11:00 AM</td>
+            <td>
+              Atracciones infantiles y familiares
+              <ul>
+                <li>Juegos como El Choconoy y Ratón Feliz.</li>
+                <li>Club de Aviación y carruseles para niños.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr id="hora3">
+            <td>12:00 PM</td>
+            <td>
+              Emoción en la montaña rusa
+              <ul>
+                <li>La Avalancha, con ocho inversiones y hasta 85 km/h.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr id="hora4">
+            <td>1:00 PM</td>
+            <td>
+              Almuerzo
+              <ul>
+                <li>Restaurantes temáticos en las plazas europeas.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr id="hora5">
+            <td>2:00 PM</td>
+            <td>
+              Juegos mecánicos clásicos
+              <ul>
+                <li>El Galeón</li>
+                <li>Jurakán</li>
+                <li>Estrugensen</li>
+                <li>Sillas Voladoras</li>
+                <li>La Girándola</li>
+                <li>Góndola Salpicona</li>
+              </ul>
+            </td>
+          </tr>
+          <tr id="hora6">
+            <td>4:00 PM</td>
+            <td>
+              Show de magia y entretenimiento
+              <ul>
+                <li>Gran Teatro de Francia.</li>
+                <li>Paseo por Plaza Fantasía y Pueblo Caribeño.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr id="hora7">
+            <td>5:30 PM</td>
+            <td>
+              Despedida
+              <ul>
+                <li>Fotos en réplicas como Fontana di Trevi y Gran Jaguar.</li>
+                <li>Salida del parque.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container my-5 tabla2">
+      <h3>Tabla de Actividades por Plaza</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+          <thead>
             <tr>
-                <td><img width="350" src="img/img1.jpg" alt=""></td>
-                <td rowspan="2"><img width="380" src="img/img3.jpg" alt=""></td>
-                <td><img width="350" src="img/img2.jpg" alt=""></td>
+              <th>Plaza Temática</th>
+              <th>Atracciones Emocionantes</th>
+              <th>Atracciones Familiares / Niños</th>
+              <th>Shows / Otras Actividades</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Plaza Chapina (Guatemala)</td>
+              <td>La Avalancha</td>
+              <td>Transcostero</td>
+              <td>Recorrido cultural</td>
             </tr>
             <tr>
-                <td><img width="350" src="img/img4.jpg" alt=""></td>
-                <td><img width="350" src="img/img5.jpg" alt=""></td>
+              <td>Plaza Pueblo Guatemalteco</td>
+              <td>Jurakán</td>
+              <td>El Choconoy, Ratón Feliz, Club de Aviación</td>
+              <td>Tiendas y gastronomía</td>
             </tr>
             <tr>
-                <td colspan="2"><img width="750" height="400" src="img/img6.jpg" alt=""></td>
-                <td><img width="350" height="400" src="img/img7.jpg" alt=""></td>
+              <td>Plaza España</td>
+              <td>El Galeón</td>
+              <td>Sillas Voladoras</td>
+              <td>Arquitectura española</td>
             </tr>
+            <tr>
+              <td>Plaza Italia</td>
+              <td>La Girándola</td>
+              <td>Góndola Salpicona, Pico Cervino</td>
+              <td>Fontana di Trevi</td>
+            </tr>
+            <tr>
+              <td>Plaza Alemania / Suiza</td>
+              <td>Estrugensen</td>
+              <td>-</td>
+              <td>Arquitectura alpina</td>
+            </tr>
+            <tr>
+              <td>Plaza Francia</td>
+              <td>-</td>
+              <td>Carros Chocones, Carrusel</td>
+              <td>Show de magia</td>
+            </tr>
+            <tr>
+              <td>Pueblo Caribeño</td>
+              <td>Los Corsarios, Balsita Loca, Happy Swing</td>
+              <td>-</td>
+              <td>Castillo de San Felipe</td>
+            </tr>
+            <tr>
+              <td>Pueblo Fantasía</td>
+              <td>El Mástil, Las Bailarinas, Tren de la Alegría</td>
+              <td>Mariposas, El Recreo, zona infantil</td>
+              <td>Temática infantil</td>
+            </tr>
+            <tr>
+              <td>General</td>
+              <td>Trenópolis</td>
+              <td>-</td>
+              <td>Tiendas y shows</td>
+            </tr>
+          </tbody>
         </table>
+      </div>
+  </div>
 
-        <h2 id="Itinerario"><font size="6">Itinerario Recomendado (10:00AM - 6:00PM)</font></h2>
-        <p><font size="4">Como parte de la experiencia te sugerimos seguir el siguiente itinerario:</font></p><br>
-    </center>
+  <div class="container my-5 tabla3" id="Precios">
+    <h3>Tarifas</h3>
+    <h6>No afiliados</h6>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Niños</th>
+              <th>Adultos</th>
+              <th>Adulto mayor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hasta 1.40m. de altura - <b>Q50.00</b></td>
+              <td>Mas de 1.40m. de altura - <b>Q100.00</b></td>
+              <td>60 años en adelante - <b>Q50.00</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
 
-    <table border="1" cellpadding="10" cellspacing="0" align="center">
-    <tr>
-      <th>Hora</th>
-      <th>Actividad</th>
-    </tr>
+  <div class="container my-5 text-center" >
+    <h2>Comentarios</h2>
+    <div id="comentariosContainer" class="row g-4">
+    
+    </div>
+  </div>
 
-    <tr id="hora1">
-      <td><font size="4">10:00 AM</font></td>
-      <td>
-        <font size="4">Entrada y primera exploración</font>
-        <ul>
-          <li>Ingreso al parque.</li>
-          <li>Recorre las plazas temáticas: Plaza Chapina, Pueblo Guatemalteco y Plaza Maya.</li>
-        </ul>
-      </td>
-    </tr>
 
-    <tr id="hora2">
-      <td><font size="4">11:00 AM</font></td>
-      <td>
-        <font size="4">Atracciones infantiles y familiares</font>
-        <ul>
-          <li>Dirígete a Plaza Pueblo Guatemalteco para juegos como El Choconoy (montaña rusa familiar) y Ratón Feliz.</li>
-          <li>También Club de Aviación y carruseles para niños.</li>
-        </ul>
-      </td>
-    </tr>
-
-    <tr id="hora3">
-      <td><font size="4">12:00 PM</font></td>
-      <td>
-        <font size="4">Emoción en la montaña rusa</font>
-        <ul>
-          <li>Atracción estrella: La Avalancha, montaña rusa con ocho inversiones, 900 m de recorrido y hasta 85 km/h.</li>
-        </ul>
-      </td>
-    </tr>
-
-    <tr id="hora4">
-      <td><font size="4">1:00 PM</font></td>
-      <td>
-        <font size="4">Almuerzo</font>
-        <ul>
-          <li>Explora las plazas estilo europeo y elige un restaurante temático.</li>
-        </ul>
-      </td>
-    </tr>
-
-    <tr id="hora5">
-      <td><font size="4">2:00 PM</font></td>
-      <td>
-        <font size="4">Juegos mecánicos clásicos</font>
-        <ul>
-          <li>Recomendamos:</li>
-          <ul>
-            <li>El Galeón</li>
-            <li>Jurakán</li>
-            <li>Estrugensen</li>
-            <li>Sillas Voladoras</li>
-            <li>La Girándola</li>
-            <li>Góndola Salpicona</li>
-          </ul>
-        </ul>
-      </td>
-    </tr>
-
-    <tr id="hora6">
-      <td><font size="4">4:00 PM</font></td>
-      <td>
-        <font size="4">Show de magia y entretenimiento</font>
-        <ul>
-          <li>Show de magia en el Gran Teatro de Francia.</li>
-          <li>Paseo por Plaza Fantasía y Pueblo Caribeño (embarcación estilo Castillo de San Felipe).</li>
-        </ul>
-      </td>
-    </tr>
-
-    <tr id="hora7">
-      <td><font size="4">5:30 PM</font></td>
-      <td>
-        <font size="4">Despedida</font>
-        <ul>
-          <li>Fotos frente a réplicas: Fontana di Trevi, Gran Jaguar, Moulin Rouge.</li>
-          <li>Salida del parque.</li>
-        </ul>
-      </td>
-    </tr>
-  </table>
-
-  <br><br>
-
-  <center>
-    <h2 id="Actividades"><font size="6">Tabla de Actividades por Plaza</font></h2>
-
-    <table border="1" cellpadding="5" cellspacing="0" align="center">
-      <tr>
-        <th>Plaza Temática</th>
-        <th>Atracciones Emocionantes</th>
-        <th>Atracciones Familiares / Niños</th>
-        <th>Shows / Otras Actividades</th>
-      </tr>
-      <tr>
-        <td>Plaza Chapina (Guatemala)</td>
-        <td>La Avalancha</td>
-        <td>Transcostero (tren panorámico)</td>
-        <td>Recorrido cultural por plazas</td>
-      </tr>
-      <tr>
-        <td>Plaza Pueblo Guatemalteco</td>
-        <td>Jurakán</td>
-        <td>El Choconoy, Ratón Feliz, Club de Aviación</td>
-        <td>Tiendas y gastronomía local</td>
-      </tr>
-      <tr>
-        <td>Plaza España</td>
-        <td>El Galeón</td>
-        <td>Sillas Voladoras</td>
-        <td>Ambiente y arquitectura española</td>
-      </tr>
-      <tr>
-        <td>Plaza Italia</td>
-        <td>La Girándola</td>
-        <td>Góndola Salpicona, Pico Cervino</td>
-        <td>Réplica de la Fontana di Trevi</td>
-      </tr>
-      <tr>
-        <td>Plaza Alemania / Suiza</td>
-        <td>Estrugensen</td>
-        <td></td>
-        <td>Arquitectura alpina y restauración</td>
-      </tr>
-      <tr>
-        <td>Plaza Francia</td>
-        <td></td>
-        <td>Carros Chocones, Carrusel de dos pisos</td>
-        <td>Le Gran Theatre (show de magia)</td>
-      </tr>
-      <tr>
-        <td>Pueblo Caribeño</td>
-        <td>Los Corsarios, La Balsita Loca, Happy Swing</td>
-        <td></td>
-        <td>Embarcación acuática estilo Castillo de San Felipe</td>
-      </tr>
-      <tr>
-        <td>Pueblo Fantasía</td>
-        <td>El Mastil, Las Bailarinas, Tren de la Alegría</td>
-        <td>Mariposas, El Recreo, zona infantil</td>
-        <td>Temática de fantasía para niños</td>
-      </tr>
-      <tr>
-        <td>General</td>
-        <td>Trenópolis (maquetas de trenes a escala)</td>
-        <td></td>
-        <td>Tiendas, restaurantes, shows ambulantes</td>
-      </tr>
-    </table>
-  </center><br><br>
-
-    <footer>
-    <center>
-        <hr>
-        <p >
-        <font color="gray" size="4">
-            Mario Andres Culajay Roldan<br>
-            Carnet: 9490-22-5771
-        </font>
-        </p>
-    </center>
+  <footer>
+    <p><br>
+      Mario Andres Culajay Roldan<br>
+      Carnet: 9490-22-5771
+    </p>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+  <script src="js/indexScript.js"></script>
 </body>
 </html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilo/Contactanos_estilo.css">
+    <title>Contactanos</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"><img src="img/logo-irtra.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Inicio
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="index.html">Galeria</a></li>
+                    <li><a class="dropdown-item" href="index.html">Itinerario</a></li>
+                    <li><a class="dropdown-item" href="index.html">Actividades</a></li>
+                </ul>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="Atracciones.html">Atracciones</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="Alojamientos.html">Alojamiento</a>
+                </li>      
+                <li class="nav-item">
+                <a class="nav-link" href="#">Contactanos</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Formulario de contacto</h1>
+        <form id="FormularioContacto" class="card p-4 shadow-sm" novalidate>
+            <!-- Nombre -->
+            <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre completo</label>
+            <input type="text" class="form-control" id="nombre" required>
+            <div class="invalid-feedback">El nombre debe tener al menos 3 caracteres.</div>
+            </div>
+
+            <!-- Fecha -->
+            <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha de nacimiento</label>
+            <input type="date" class="form-control" id="fecha" required>
+            <div class="invalid-feedback">Por favor selecciona una fecha de nacimiento.</div>
+            </div>
+
+            <!-- Correo -->
+            <div class="mb-3">
+            <label for="correo" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="correo" required>
+            <div class="invalid-feedback">Introduce un correo válido.</div>
+            </div>
+
+            <!-- Mensaje -->
+            <div class="mb-3">
+            <label for="mensaje" class="form-label">Mensaje</label>
+            <textarea class="form-control" id="mensaje" rows="3" required></textarea>
+            <div class="invalid-feedback">El mensaje debe tener al menos 10 caracteres.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Enviar</button>
+        </form>
+    </div>
+
+        <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmacionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">¡Formulario enviado!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                Tu mensaje se ha enviado con éxito. Nos pondremos en contacto contigo pronto.
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><br>
+        Mario Andres Culajay Roldan<br>
+        Carnet: 9490-22-5771
+        </p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="js/ContactanosScript.js"></script>
+</body>
+</html>
