@@ -21,7 +21,7 @@ function Login() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/login", {
+      const response = await fetch("/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
