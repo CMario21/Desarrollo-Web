@@ -31,10 +31,10 @@ app.post("/login", (req, res) => {
 // Servir archivos estáticos de React
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "../Cliente/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.join(__dirname, "../Cliente/dist/index.html"));
 });
 
 // Iniciar servidor
