@@ -21,14 +21,12 @@ function Login() {
     setError("");
 
     try {
-      const response = await fetch("/register", {
+      const response = await fetch("/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+      
       const data = await res.json();
 
       if (!res.ok) {
