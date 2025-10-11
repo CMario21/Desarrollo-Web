@@ -13,6 +13,7 @@ const users = [];
 
 // Rutas de API
 app.post("/register", (req, res) => {
+    console.log("Registro recibido:", req.body);
   const { email } = req.body;
   if (users.find(u => u.email === email)) {
     return res.status(400).json({ message: "Email ya registrado" });
@@ -22,6 +23,8 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
+    console.log("Login recibido:", req.body);
+
   const { email, password } = req.body;
   const user = users.find(u => u.email === email && u.password === password);
   if (!user) return res.status(400).json({ message: "Credenciales incorrectas" });
@@ -31,10 +34,10 @@ app.post("/login", (req, res) => {
 // Servir archivos estáticos de React
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "../Cliente/dist")));
+app.use(express.static(path.resolve("Cliente/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../Cliente/dist/index.html"));
+  res.sendFile(path.resolve("Cliente/dist/index.html"));
 });
 
 // Iniciar servidor
