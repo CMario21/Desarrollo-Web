@@ -1,21 +1,36 @@
-Descripcion de la API
+# Descripción de la API
+
 Esta API simula un sistema básico de gestión de usuarios, utilizando un arreglo en memoria para almacenar los datos.  
-Permite realizar operaciones CRUD (Create, Read, Update, Delete) y valida que el **DPI** sea único para cada usuario.
+Permite realizar operaciones **CRUD** (Create, Read, Update, Delete) y valida que el **DPI** sea único para cada usuario.
 
-Pasos para ejecutar localmente
-- Instalar dependencias
+---
+
+## Pasos para ejecutar localmente
+
+### Instalar dependencias
+```bash
 npm install
+```
 
-- Ejecutar API
+### Ejecutar la API
+```bash
 node server.js
+```
 
-La api se ejecutara en el siguiente enlace: http://localhost:3000
+### Enlace local: http://localhost:3000
 
-URL de la API en render: https://desarrollo-web-37ot.onrender.com/users
+---
 
-Endpoints de la API
--GET /users
-CODIGO: 200 OK
+# URL de la API en Render 
+https://desarrollo-web-37ot.onrender.com/users
+
+---
+
+# Endpoints de la API
+
+### Get /users
+```bash
+Codigo: 200 ok
 [
   {
     "dpi": "1234567890101",
@@ -30,67 +45,63 @@ CODIGO: 200 OK
     "password": "123458"
   }
 ]
-
--POST/users
-Solicitud
+```
+### POST /users
+Solicitud:
+```bash
 {
-  "dpi": "1234567890101",
-  "name": "Juan Pérez",
-  "email": "juan@example.com",
-  "password": "12345"
+  "dpi": "9834573845123",
+  "name": "Manuel Escobar",
+  "email": "manuel@example.com",
+  "password": "123458"
 }
-
+```
 Respuestas
-CODIGO: 201 Created
+```
+Código: 201 Created
 {
-  "message": "Usuario creado correctamente",
-  "user": {
-    "dpi": "1234567890101",
-    "name": "Juan Pérez",
-    "email": "juan@example.com",
-    "password": "12345"
-  }
+  "message": "Usuario agregado correctamente"
 }
-
-CODIGO: 409 Conflict
+```
+```
+Código: 409 Conflict
 {
-  "error": "El DPI ya está registrado"
+  "error": "El usuario con este DPI ya existe"
 }
-
--PUT/users/:dpi
-Solicitud
+```
+### PUT /users/:dpi
+Solicitud:
+```bash
 {
-  "name": "Juan Actualizado",
-  "email": "juan.actualizado@example.com",
-  "password": "abc123",
-  "newDpi": "1234567890999"
+  "name": "Juan Pérez Actualizado",
+  "email": "juanperez@example.com",
+  "password": "67890"
+  "newDPI": "1234567890123"
 }
-
+```
 Respuestas
-CODIGO: 200 OK
+```
+Código: 200 OK
 {
-  "message": "Usuario actualizado correctamente",
-  "user": {
-    "dpi": "1234567890999",
-    "name": "Juan Actualizado",
-    "email": "juan.actualizado@example.com",
-    "password": "abc123"
-  }
+  "message": "Usuario actualizado correctamente"
 }
-
-CODIGO: 404 Not Found
+```
+```
+Código: 404 Not Found
 {
   "error": "Usuario no encontrado"
 }
-
-CODIGO: 404 Not Found
+```
+```
+Código: 409 Conflict
 {
-  "error": "Usuario no encontrado"
+  "error": "El nuevo DPI ya está registrado"
 }
-
--DELETE /users/:dpi
+```
+### DELETE /users/:dpi
 Respuestas
-CODIGO: 200 OK
+```
+Código: 200 OK
 {
   "message": "Usuario eliminado correctamente",
   "user": {
@@ -100,19 +111,13 @@ CODIGO: 200 OK
     "password": "12345"
   }
 }
-
-CODIGO: 404 Not Found
+```
+```
+Código: 404 Not Found
 {
   "error": "Usuario no encontrado"
 }
-
-
-
-
-
-
-
-
+```
 
 
 
