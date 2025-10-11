@@ -27,9 +27,9 @@ function Login() {
         body: JSON.stringify(formData),
       });
       
-      const data = await res.json();
+      const data = await response.json(); // <-- aquí debe ser 'response'
 
-      if (!res.ok) {
+      if (!response.ok) { // <-- aquí también
         setError(data.message || "Error al iniciar sesión");
       } else {
         login(data.user); // guarda los datos del usuario en el contexto
