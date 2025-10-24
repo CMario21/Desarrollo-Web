@@ -1,9 +1,21 @@
+// server/src/modules/campaigns/campaigns.routes.ts
 import { Router } from 'express'
 import { prisma } from '../../prisma.js'
 import { z } from 'zod'
 import { authJwt, requireAdmin } from '../../middleware/authJwt.js'
 
 const r = Router()
+
+// Tipos locales para ayudar a TS
+type GroupRow = { candidate_id: bigint; _count: { _all: number } }
+type CandidateWithUser = {
+  id: bigint
+  user_id: bigint
+  campaign_id: bigint
+  bio: string | null
+  created_at: Date
+  user?: { nombre: string } | null
+}
 
 // GET /api/campaigns
 r.get('/', async (_req, res) => {
@@ -13,28 +25,41 @@ r.get('/', async (_req, res) => {
 
 // GET /api/campaigns/:id
 r.get('/:id', async (req, res) => {
-  const id = BigInt(req.params.id)
+  const params = z.object({ id: z.string().regex(/^\d+$/) }).parse(req.params)
+  const id = BigInt(params.id)
+
   const camp = await prisma.campaign.findUnique({
     where: { id },
-    include: { candidates: true },
+    include: {
+      candidates: {
+        include: {
+          user: { select: { nombre: true } },
+        },
+      },
+    },
   })
   if (!camp) return res.status(404).json({ message: 'No encontrada' })
 
-const agg: Array<{ candidate_id: bigint; _count: { _all: number } }> =
-  await prisma.vote.groupBy({
-    by: ['candidate_id'],
+  // ❌ NO anotar aquí como GroupRow[] en la variable; eso rompe la inferencia del parámetro
+  const grouped = await prisma.vote.groupBy({
+    by: ['candidate_id'] as const,
     where: { campaign_id: id },
     _count: { _all: true },
   })
+  // ✅ si quieres tipo explícito, cástalo al RESULTADO, no al parámetro:
+  const agg = grouped as GroupRow[]
 
-  const results = camp.candidates.map(
-    (c: typeof camp.candidates[number]) => ({
-      candidateId: c.id,
-      nombre: c.nombre,
-      votos: agg.find(a => a.candidate_id === c.id)?._count._all ?? 0,
-    })
-  )
-  res.json({ ...camp, candidates: results })
+  const results = camp.candidates.map((c: CandidateWithUser) => ({
+    candidateId: c.id,
+    nombre: c.user?.nombre ?? '',
+    votos: (agg.find((a: GroupRow) => a.candidate_id === c.id)?._count._all) ?? 0,
+    bio: c.bio ?? null,
+  }))
+
+  res.json({
+    ...camp,
+    candidates: results,
+  })
 })
 
 // POST /api/campaigns (solo admin)
@@ -65,7 +90,9 @@ r.post('/', authJwt, requireAdmin, async (req, res) => {
 
 // (opcional) PATCH /api/campaigns/:id (solo admin)
 r.patch('/:id', authJwt, requireAdmin, async (req, res) => {
-  const id = BigInt(req.params.id)
+  const params = z.object({ id: z.string().regex(/^\d+$/) }).parse(req.params)
+  const id = BigInt(params.id)
+
   const dto = z.object({
     titulo: z.string().optional(),
     descripcion: z.string().optional(),

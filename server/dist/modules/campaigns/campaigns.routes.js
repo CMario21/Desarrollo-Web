@@ -1,3 +1,4 @@
+// server/src/modules/campaigns/campaigns.routes.ts
 import { Router } from 'express';
 import { prisma } from '../../prisma.js';
 import { z } from 'zod';
@@ -10,24 +11,38 @@ r.get('/', async (_req, res) => {
 });
 // GET /api/campaigns/:id
 r.get('/:id', async (req, res) => {
-    const id = BigInt(req.params.id);
+    const params = z.object({ id: z.string().regex(/^\d+$/) }).parse(req.params);
+    const id = BigInt(params.id);
     const camp = await prisma.campaign.findUnique({
         where: { id },
-        include: { candidates: true },
+        include: {
+            candidates: {
+                include: {
+                    user: { select: { nombre: true } },
+                },
+            },
+        },
     });
     if (!camp)
         return res.status(404).json({ message: 'No encontrada' });
-    const agg = await prisma.vote.groupBy({
+    // ❌ NO anotar aquí como GroupRow[] en la variable; eso rompe la inferencia del parámetro
+    const grouped = await prisma.vote.groupBy({
         by: ['candidate_id'],
         where: { campaign_id: id },
         _count: { _all: true },
     });
+    // ✅ si quieres tipo explícito, cástalo al RESULTADO, no al parámetro:
+    const agg = grouped;
     const results = camp.candidates.map((c) => ({
         candidateId: c.id,
-        nombre: c.nombre,
-        votos: agg.find(a => a.candidate_id === c.id)?._count._all ?? 0,
+        nombre: c.user?.nombre ?? '',
+        votos: (agg.find((a) => a.candidate_id === c.id)?._count._all) ?? 0,
+        bio: c.bio ?? null,
     }));
-    res.json({ ...camp, candidates: results });
+    res.json({
+        ...camp,
+        candidates: results,
+    });
 });
 // POST /api/campaigns (solo admin)
 r.post('/', authJwt, requireAdmin, async (req, res) => {
@@ -55,7 +70,8 @@ r.post('/', authJwt, requireAdmin, async (req, res) => {
 });
 // (opcional) PATCH /api/campaigns/:id (solo admin)
 r.patch('/:id', authJwt, requireAdmin, async (req, res) => {
-    const id = BigInt(req.params.id);
+    const params = z.object({ id: z.string().regex(/^\d+$/) }).parse(req.params);
+    const id = BigInt(params.id);
     const dto = z.object({
         titulo: z.string().optional(),
         descripcion: z.string().optional(),
