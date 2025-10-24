@@ -8,16 +8,19 @@ import axios from 'axios'
     withCredentials: false, // usando Authorization Bearer, no cookies
   })
   
-  // Interceptor: lee token desde localStorage en cada petición y lo adjunta
-  api.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token')
-    console.debug('[api] attach token?', !!token, config.method, config.url)
-    if (token) {
-      config.headers = config.headers || {}
-      config.headers['Authorization'] = `Bearer ${token}`
-      config.headers['x-access-token'] = token // fallback
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token')
+  console.log('[axios] →', config.method?.toUpperCase(), config.url, 'token?', !!token)
+  if (token) {
+    const h = config.headers as any
+    if (h?.set) {
+      h.set('Authorization', `Bearer ${token}`)
+    } else {
+      h.Authorization = `Bearer ${token}`
     }
-    return config
-  }, (err) => Promise.reject(err))
+  }
+  return config
+})
+
   
   export default api
