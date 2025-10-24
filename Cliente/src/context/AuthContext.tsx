@@ -6,6 +6,7 @@ interface AuthState {
   user: AuthUser | null
   token: string | null
   login: (cred: { colegiado: string; dpi: string; password: string }) => Promise<void>
+  logout: () => void
 }
 
 const AuthCtx = createContext<AuthState | undefined>(undefined)
@@ -14,36 +15,43 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null)
   const [token, setToken] = useState<string | null>(null)
 
-  // Rehidrata sesión al montar
   useEffect(() => {
     const t = localStorage.getItem('token')
     const u = localStorage.getItem('user')
     if (t && u) {
       setToken(t)
-      try {
-        setUser(JSON.parse(u))
-      } catch {}
-      // Asegura que Axios incluya el token automáticamente
-      api.defaults.headers = api.defaults.headers || {}
-      api.defaults.headers.common = api.defaults.headers.common || {}
-      api.defaults.headers.common['Authorization'] = `Bearer ${t}`
+      try { setUser(JSON.parse(u)) } catch {}
+     // asegurarse que la instancia api use el token en peticiones inmediatamente
+     api.defaults.headers = api.defaults.headers || {}
+     api.defaults.headers.common = api.defaults.headers.common || {}
+     api.defaults.headers.common['Authorization'] = `Bearer ${t}`
     }
   }, [])
 
-  // Login y guardado persistente
-  async function login(cred: { colegiado: string; dpi: string; password: string }) {
-    const { data } = await api.post<LoginResponse>('/auth/login', cred)
-    localStorage.setItem('token', data.token)
-    localStorage.setItem('user', JSON.stringify(data.user))
+async function login(cred: { colegiado: string; dpi: string; password: string }) {
+  const { data } = await api.post<LoginResponse>('/auth/login', cred)
+  localStorage.setItem('token', data.token)
+  localStorage.setItem('user', JSON.stringify(data.user))
 
-    // Setea el header por defecto para próximas peticiones
-    api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
+  // 👉 Setea el header por defecto inmediatamente
+  api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
 
-    setToken(data.token)
-    setUser(data.user)
-  }
+  setToken(data.token)
+  setUser(data.user)
+}
 
-  const value = useMemo(() => ({ user, token, login }), [user, token])
+function logout() {
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
+
+  // 👉 Limpia el header por defecto
+  delete api.defaults.headers.common['Authorization']
+
+  setToken(null)
+  setUser(null)
+}
+
+  const value = useMemo(() => ({ user, token, login, logout }), [user, token])
   return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>
 }
 
