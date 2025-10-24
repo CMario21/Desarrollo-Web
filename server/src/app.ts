@@ -17,7 +17,14 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // Mantengo tu configuración original de CORS basada en variable de entorno
-app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
+- app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
+ const corsOrigin = process.env.CORS_ORIGIN ?? '*'
+ app.use(cors({
+   origin: corsOrigin,
+   credentials: false, // si usas cookies poner true y NO usar '*'
+   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'x-access-token'],
+   methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS']
+ }))
 
 app.use(helmet());
 app.use(morgan('dev'));

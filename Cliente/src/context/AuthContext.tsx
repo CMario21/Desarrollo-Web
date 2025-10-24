@@ -21,6 +21,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (t && u) {
       setToken(t)
       try { setUser(JSON.parse(u)) } catch {}
+     // asegurarse que la instancia api use el token en peticiones inmediatamente
+     api.defaults.headers = api.defaults.headers || {}
+     api.defaults.headers.common = api.defaults.headers.common || {}
+     api.defaults.headers.common['Authorization'] = `Bearer ${t}`
     }
   }, [])
 

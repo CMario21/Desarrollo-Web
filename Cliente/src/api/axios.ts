@@ -1,35 +1,23 @@
 // Cliente/src/api/axios.ts
 import axios from 'axios'
-import type { InternalAxiosRequestConfig } from 'axios'
 
-const baseURL =
-  (import.meta.env?.VITE_API_URL && import.meta.env.VITE_API_URL.trim().length > 0)
-    ? import.meta.env.VITE_API_URL
-    : '/api'
-
-const api = axios.create({
-  baseURL,
-  withCredentials: false,
-})
-
-api.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
+  const baseURL = import.meta.env.VITE_API_URL ?? 'https://votaciones-app-5b5c.onrender.com/api'
+  
+  const api = axios.create({
+    baseURL,
+    withCredentials: false, // usando Authorization Bearer, no cookies
+  })
+  
+  // Interceptor: lee token desde localStorage en cada petición y lo adjunta
+  api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token')
+    console.debug('[api] attach token?', !!token, config.method, config.url)
     if (token) {
-      // Axios v1: headers suele ser AxiosHeaders con método .set()
-      const h = config.headers as any
-      if (h?.set) {
-        h.set('Authorization', `Bearer ${token}`)
-        h.set('x-access-token', token) // opcional
-      } else {
-        // fallback por si fuera un objeto plano
-        h['Authorization'] = `Bearer ${token}`
-        h['x-access-token'] = token
-      }
+      config.headers = config.headers || {}
+      config.headers['Authorization'] = `Bearer ${token}`
+      config.headers['x-access-token'] = token // fallback
     }
     return config
-  },
-  (err) => Promise.reject(err)
-)
-
-export default api
+  }, (err) => Promise.reject(err))
+  
+  export default api
