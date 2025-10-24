@@ -1,0 +1,81 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum user_role {
+  admin
+  voter
+}
+
+enum campaign_status {
+  enabled
+  disabled
+  closed
+}
+
+model Campaign {
+  id                              BigInt          @id @default(autoincrement())
+  titulo                          String
+  descripcion                     String?
+  estado                          campaign_status @default(disabled)
+  fecha_inicio                    DateTime?
+  fecha_fin                       DateTime?
+  votes_per_user                  Int
+  allow_duplicate_candidate_votes Boolean         @default(false)
+  created_at                      DateTime        @default(now())
+
+  candidates CampaignCandidate[] // 👈 relación
+  votes      Vote[] // existente
+}
+
+model User {
+  id               BigInt    @id @default(autoincrement())
+  colegiado        String    @unique
+  dpi              String    @unique
+  nombre           String
+  email            String    @unique
+  fecha_nacimiento DateTime
+  rol              user_role @default(voter)
+  password_hash    String
+  estado           String    @default("active")
+  created_at       DateTime  @default(now())
+
+  asCandidate CampaignCandidate[] // 👈 relación
+  votes       Vote[] // existente
+}
+
+model CampaignCandidate {
+  id          BigInt   @id @default(autoincrement())
+  campaign_id BigInt
+  user_id     BigInt
+  bio         String?
+  created_at  DateTime @default(now())
+
+  campaign Campaign @relation(fields: [campaign_id], references: [id])
+  user     User     @relation(fields: [user_id], references: [id])
+
+  votes Vote[]
+
+  @@unique([campaign_id, user_id]) // 👈 mismo usuario no puede repetirse en la campaña
+}
+
+model Vote {
+  id           BigInt   @id @default(autoincrement())
+  user_id      BigInt
+  campaign_id  BigInt
+  candidate_id BigInt // 👈 ahora referencia CampaignCandidate.id
+  created_at   DateTime @default(now())
+
+  user      User              @relation(fields: [user_id], references: [id])
+  campaign  Campaign          @relation(fields: [campaign_id], references: [id])
+  candidate CampaignCandidate @relation(fields: [candidate_id], references: [id])
+
+  @@index([campaign_id, candidate_id])
+  @@index([user_id, campaign_id])
+}
