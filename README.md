@@ -6,6 +6,18 @@ Este proyecto implementa una **plataforma completa de votaciones** con autentica
 - **Backend:** Node.js + Express + Prisma + PostgreSQL  
 - **Despliegue:** Render (full-stack)
 
+Enlace a la APP (render): https://votaciones-app-5b5c.onrender.com
+
+Enlace a manual usuario: https://drive.google.com/file/d/1RGqIQ-xaq6lr6P5AidaY6B0IqlK5GhIe/view?usp=sharing
+
+Enlace a manual tecnico: https://drive.google.com/file/d/1qlxQDP7aoB2RdYDDC-VOJz568AYsxSDi/view?usp=sharing
+
+---
+
+# Integrantes
+- Mario Andres Culajay Roldan 9490-22-5771
+- Samuel Estuardo España Son 9490-22-11789
+
 ---
 
 ## Características Principales
