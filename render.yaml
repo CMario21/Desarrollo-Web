@@ -1,4 +1,3 @@
-# render.yaml (ubícalo en la RAÍZ del repo)
 services:
   - type: web
     name: votaciones-app
@@ -6,39 +5,35 @@ services:
     plan: free
 
     envVars:
-      - key: NODE_ENV
-        value: production
       - key: DATABASE_URL
         sync: false
       - key: JWT_SECRET
         generateValue: true
-      # Opcional: restringe CORS desde tu dominio público si deseas
+      # (Opcional) CORS_ORIGIN si lo usas
       # - key: CORS_ORIGIN
       #   value: https://tu-dominio.render.com
 
-    # Construye backend (TS + Prisma), frontend (Vite) y copia el build al backend
     buildCommand: |
       set -e
       # --- Backend ---
       cd server
-      npm ci
-      npm run build            # tsc -p . && prisma generate
+      npm ci --include=dev          # instala devDependencies (typescript, @types, prisma)
+      npm run build                 # tsc -p . && prisma generate
       cd ..
 
       # --- Frontend (Vite) ---
       cd Cliente
-      npm ci
-      npm run build            # genera /Cliente/dist
+      npm ci --include=dev          # instala devDependencies (vite, @types/node, etc.)
+      npm run build                 # genera /Cliente/dist
       cd ..
 
       # --- Empaquetar front dentro del backend compilado ---
       mkdir -p server/dist/public
       cp -r Cliente/dist/* server/dist/public/
 
-    # Arranca tu API (sirve /api y el front ya empacado en /public)
-    startCommand: node server/dist/server.js
+    # Producción SOLO en runtime
+    startCommand: NODE_ENV=production node server/dist/server.js
 
-    # (Opcional) filtra autodeploys para cambios solo en estas carpetas
     buildFilter:
       paths:
         - Cliente/**
