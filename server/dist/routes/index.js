@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import auth from '../modules/auth/auth.routes.js';
+import campaigns from '../modules/campaigns/campaigns.routes.js';
+import candidates from '../modules/campaigns/candidates.routes.js';
+import votes from '../modules/votes/votes.routes.js';
+const r = Router();
+r.use('/auth', auth);
+r.use('/campaigns', campaigns);
+r.use('/campaigns/:campaignId/candidates', candidates);
+r.use('/campaigns/:id/votes', votes);
+r.get('/health', (_req, res) => res.json({ status: 'ok' }));
+export default r;

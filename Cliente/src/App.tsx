@@ -1,35 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react';
+import { api } from './api/axios';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [status, setStatus] = useState<string>('cargando...');
+
+  useEffect(() => {
+    // Prueba rápida: intenta pegarle a tu API (ajusta la ruta si tienes /health)
+    api.get('/health')
+      .then(() => setStatus('API OK'))
+      .catch(() => setStatus('API no disponible'));
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', fontFamily: 'system-ui, sans-serif' }}>
+      <div style={{ textAlign: 'center' }}>
+        <h1>Votaciones</h1>
+        <p>Estado backend: <strong>{status}</strong></p>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
