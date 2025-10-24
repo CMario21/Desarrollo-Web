@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Compilación y dependencias
+node_modules/
+dist/
+
+# Archivos compilados accidentales
+src/**/*.js
