@@ -24,20 +24,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  async function login(cred: { colegiado: string; dpi: string; password: string }) {
-    const { data } = await api.post<LoginResponse>('/auth/login', cred)
-    localStorage.setItem('token', data.token)
-    localStorage.setItem('user', JSON.stringify(data.user))
-    setToken(data.token)
-    setUser(data.user)
-  }
+async function login(cred: { colegiado: string; dpi: string; password: string }) {
+  const { data } = await api.post<LoginResponse>('/auth/login', cred)
+  localStorage.setItem('token', data.token)
+  localStorage.setItem('user', JSON.stringify(data.user))
 
-  function logout() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    setToken(null)
-    setUser(null)
-  }
+  // 👉 Setea el header por defecto inmediatamente
+  api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
+
+  setToken(data.token)
+  setUser(data.user)
+}
+
+function logout() {
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
+
+  // 👉 Limpia el header por defecto
+  delete api.defaults.headers.common['Authorization']
+
+  setToken(null)
+  setUser(null)
+}
 
   const value = useMemo(() => ({ user, token, login, logout }), [user, token])
   return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>

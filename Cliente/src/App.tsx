@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { api } from './api/axios';
+// antes: import { api } from './api/axios'
+import api from './api/axios'
+
 
 function App() {
   const [status, setStatus] = useState<string>('cargando...');
