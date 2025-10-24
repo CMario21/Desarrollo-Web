@@ -20,11 +20,16 @@ export default function CampaignList() {
     queryFn: async () => (await api.get<Campaign[]>('/campaigns')).data
   })
 
-  const patchState = useMutation({
-    mutationFn: async ({ id, estado }: { id: string; estado: Campaign['estado'] }) =>
-      api.patch(`/campaigns/${id}`, { estado }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['campaigns'] })
-  })
+const patchState = useMutation({
+  mutationFn: async ({ id, estado }: { id: string; estado: Campaign['estado'] }) =>
+    api.patch(`/campaigns/${id}`, { estado }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token') || ''}`
+      }
+    }),
+  onSuccess: () => qc.invalidateQueries({ queryKey: ['campaigns'] })
+})
+
 
   function renderEstado(e: Campaign['estado']) {
     const map: Record<Campaign['estado'], string> = {
