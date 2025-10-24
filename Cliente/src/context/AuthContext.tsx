@@ -21,18 +21,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (t && u) {
       setToken(t)
       try { setUser(JSON.parse(u)) } catch {}
-      api.defaults.headers.common['Authorization'] = `Bearer ${t}` // setear para peticiones inmediatas
     }
   }, [])
 
   async function login(cred: { colegiado: string; dpi: string; password: string }) {
     const { data } = await api.post<LoginResponse>('/auth/login', cred)
-    
     localStorage.setItem('token', data.token)
     localStorage.setItem('user', JSON.stringify(data.user))
     setToken(data.token)
     setUser(data.user)
-    api.defaults.headers.common['Authorization'] = `Bearer ${data.token}` // setear header por defecto
   }
 
   function logout() {
@@ -40,7 +37,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('user')
     setToken(null)
     setUser(null)
-    delete api.defaults.headers.common['Authorization'] // limpiar header al logout
   }
 
   const value = useMemo(() => ({ user, token, login, logout }), [user, token])
